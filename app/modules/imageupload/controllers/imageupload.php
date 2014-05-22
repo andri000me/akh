@@ -30,9 +30,9 @@ class Imageupload extends Front_Controller {
     {
         parent::__construct();
         //$this->load->library('upload');
-        $this->load->library('image_moo');
         
         $this->load->library('image_lib');
+        $this->load->library('image_moo');
         $this->load->model("imageupload/imageupload_model","imagecrud");
         
         $this->real_path = realpath('assets/doc/img/real/');
@@ -57,8 +57,7 @@ class Imageupload extends Front_Controller {
         $upload_conf = array(
             "upload_path" => $this->real_path,
             "allowed_types" => "jpg|JPG|png",
-            "encrypt_name" => FALSE,
-            "overwrite" => TRUE
+            "encrypt_name" => true
         );
         $this->load->library('upload', $upload_conf);
         
@@ -72,9 +71,9 @@ class Imageupload extends Front_Controller {
             {
                 // insert
                 $info = array(
-                'nama' => $upload_data2[$i]["file_name"],
+                'nama' => $upload_data2[$i]["orig_name"],
                 'type' => $upload_data2[$i]["file_ext"],
-                'enkrip' => md5($upload_data2[$i]["raw_name"]).$upload_data2[$i]["file_ext"]
+                'enkrip' => $upload_data2[$i]["file_name"]
                 
             );
             $this->imagecrud->insert($info, 'images');
@@ -87,7 +86,7 @@ class Imageupload extends Front_Controller {
             $smal_des = "./assets/doc/img/small/";
             $thum_des = "./assets/doc/img/thumbnails/";
             
-            $source_full = $this->full_path."/".$upload_data2[$i]["file_name"];
+            //$source_full = $this->full_path."/".$upload_data2[$i]["file_name"];
             
             $medi_h = 342;
             $medi_w = 342;
@@ -111,21 +110,18 @@ class Imageupload extends Front_Controller {
                     ->round(10)
                     ->save($full_des.$upload_data2[$i]['file_name'],TRUE)
            // Thumbnails        
-                    ->load($source_full)
                     ->make_watermark_text("BeliOnderdil.com", $font, 18, "#CC6100")
                     ->stretch($thum_w,$thum_h)
                     ->watermark(5,8)
                     ->round(10)
                     ->save($thum_des.$upload_data2[$i]['file_name'],TRUE)
            // Small
-                    ->load($source_full)
                     ->make_watermark_text("BeliOnderdil.com", $font, 18, "#CC6100")
                     ->stretch($smal_w,$smal_h)
                     ->watermark(5,8)
                     ->round(10)
                     ->save($smal_des.$upload_data2[$i]['file_name'],TRUE)
            // Medium
-                    ->load($source_full)
                     ->make_watermark_text("BeliOnderdil.com", $font, 18, "#CC6100")
                     ->stretch($medi_w,$medi_h)
                     ->watermark(5,8)
