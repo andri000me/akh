@@ -102,31 +102,37 @@ class Imageupload extends Front_Controller {
            //$font_img = './assets/img/BELI_ONDERDIL_2.png'B5622A;
           
             $this->image_moo
-           // Full
+            // Full
                     ->load($source)
                     ->make_watermark_text("BeliOnderdil.com", $font, 18, "#CC6100")
                     ->resize(2000,2000)
+                   
                     ->watermark(5,8)
                     ->round(10)
-                    ->save($full_des.$upload_data2[$i]['file_name'],TRUE)
-           // Thumbnails        
-                    ->make_watermark_text("BeliOnderdil.com", $font, 18, "#CC6100")
+                    ->save($full_des.$upload_data2[$i]['file_name'],true)
+            // Thumbnails        
+                    ->make_watermark_text("BeliOnderdil.com", $font, 15, "#CC6100")
                     ->stretch($thum_w,$thum_h)
+                   
                     ->watermark(5,8)
                     ->round(10)
-                    ->save($thum_des.$upload_data2[$i]['file_name'],TRUE)
-           // Small
+                    ->save($thum_des.$upload_data2[$i]['file_name'],true)
+            // Small
                     ->make_watermark_text("BeliOnderdil.com", $font, 18, "#CC6100")
                     ->stretch($smal_w,$smal_h)
+                   
                     ->watermark(5,8)
                     ->round(10)
-                    ->save($smal_des.$upload_data2[$i]['file_name'],TRUE)
-           // Medium
+                    ->save($smal_des.$upload_data2[$i]['file_name'],true)
+            // Medium
                     ->make_watermark_text("BeliOnderdil.com", $font, 18, "#CC6100")
                     ->stretch($medi_w,$medi_h)
+                   
                     ->watermark(5,8)
                     ->round(10)
-                    ->save($medi_des.$upload_data2[$i]['file_name'],TRUE)
+                    ->save($medi_des.$upload_data2[$i]['file_name'],true)
+                    
+          
                                          
                    /*
                     ->set_background_colour("#49F")
@@ -149,17 +155,12 @@ class Imageupload extends Front_Controller {
                     // ->clear()
                     ;
             
-            echo '<pre>';
-            print_r($this->upload->get_multi_upload_data());
-            echo '</pre>';
+            $this->load->view("done_imageupload");
             
             if ($this->image_moo->errors) print $this->image_moo->display_errors();
             else 
             {
-                echo "Lihat hasilnya di folder " ;
-                echo '<pre>';
-                print_r($this->upload->get_multi_upload_data());
-                echo '</pre>';
+                $this->load->view("done_imageupload");
             }
             
               // langsung ubah pake library ci

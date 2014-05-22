@@ -39,7 +39,7 @@ class Laporan extends Front_Controller
     
     function produk()
     {
-         $query = $this->db->get('images');
+         $query = $this->db->order_by("nama", "asc")->get('images');
         
         $this->excel_generator->set_query($query);
         $this->excel_generator->set_header(array('nama', 'type', 'enkrip'));
