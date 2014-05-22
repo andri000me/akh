@@ -280,6 +280,43 @@ class MY_Upload extends CI_Upload {
     {
         return $this->_multi_upload_data;
     }
+    
+    public function set_filename($path, $filename)
+	{
+		if ($this->encrypt_name == TRUE)
+		{
+                    $aseli = $this->orig_name;
+                    $aseli_lagi = explode(".", $aseli);
+                    $filename = md5($aseli_lagi[0]).$this->file_ext;
+		}
+
+		if ( ! file_exists($path.$filename))
+		{
+			return $filename;
+		}
+
+		$filename = str_replace($this->file_ext, '', $filename);
+
+		$new_filename = '';
+		for ($i = 1; $i < 100; $i++)
+		{
+			if ( ! file_exists($path.$filename.$i.$this->file_ext))
+			{
+				$new_filename = $filename.$i.$this->file_ext;
+				break;
+			}
+		}
+
+		if ($new_filename == '')
+		{
+			$this->set_error('upload_bad_filename');
+			return FALSE;
+		}
+		else
+		{
+			return $new_filename;
+		}
+	}
 
     /**
      * Multile File Upload
@@ -497,5 +534,7 @@ class MY_Upload extends CI_Upload {
         //Return all file upload data.
         return TRUE;
     }
+    
+    
 
 }
