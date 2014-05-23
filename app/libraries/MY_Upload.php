@@ -285,9 +285,13 @@ class MY_Upload extends CI_Upload {
 	{
 		if ($this->encrypt_name == TRUE)
 		{
+                    /*
                     $aseli = $this->orig_name;
                     $aseli_lagi = explode(".", $aseli);
                     $filename = md5($aseli_lagi[0]).$this->file_ext;
+                    */
+                    $aseli = $this->orig_name;
+                    $filename = md5($aseli) . $this->file_ext;
 		}
 
 		if ( ! file_exists($path.$filename))
