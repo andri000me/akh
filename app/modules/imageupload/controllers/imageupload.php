@@ -86,7 +86,7 @@ class Imageupload extends Front_Controller {
             $smal_des = "./assets/doc/img/small/";
             $thum_des = "./assets/doc/img/thumbnails/";
             
-            //$source_full = $this->full_path."/".$upload_data2[$i]["file_name"];
+            $source_full = $this->full_path."/".$upload_data2[$i]["file_name"];
             
             $medi_h = 342;
             $medi_w = 342;
@@ -110,7 +110,8 @@ class Imageupload extends Front_Controller {
                     ->watermark(5,8)
                     ->round(10)
                     ->save($full_des.$upload_data2[$i]['file_name'],true)
-            // Thumbnails        
+            // Thumbnails
+                    ->load($source_full)
                     ->make_watermark_text("BeliOnderdil.com", $font, 15, "#CC6100")
                     ->stretch($thum_w,$thum_h)
                    
@@ -118,6 +119,7 @@ class Imageupload extends Front_Controller {
                     ->round(10)
                     ->save($thum_des.$upload_data2[$i]['file_name'],true)
             // Small
+                    ->load($source_full)
                     ->make_watermark_text("BeliOnderdil.com", $font, 18, "#CC6100")
                     ->stretch($smal_w,$smal_h)
                    
@@ -125,6 +127,7 @@ class Imageupload extends Front_Controller {
                     ->round(10)
                     ->save($smal_des.$upload_data2[$i]['file_name'],true)
             // Medium
+                    ->load($source_full)
                     ->make_watermark_text("BeliOnderdil.com", $font, 18, "#CC6100")
                     ->stretch($medi_w,$medi_h)
                    
