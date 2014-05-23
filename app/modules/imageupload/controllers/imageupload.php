@@ -61,10 +61,15 @@ class Imageupload extends Front_Controller {
         );
         $this->load->library('upload', $upload_conf);
         
+        
+        
+        
         if ($this->upload->do_multi_upload("myimage"))
         {
             // Simpan data array
             $upload_data2 = $this->upload->get_multi_upload_data();
+            
+            $param["total"] = count($upload_data2);
             
             // Hitung file myimage dalam array
             for($i=0; $i<count($upload_data2); $i++)
@@ -158,12 +163,12 @@ class Imageupload extends Front_Controller {
                     // ->clear()
                     ;
             
-            $this->load->view("done_imageupload");
+            $this->load->view("done_imageupload", $param);
             
             if ($this->image_moo->errors) print $this->image_moo->display_errors();
             else 
             {
-                $this->load->view("done_imageupload");
+                $this->load->view("done_imageupload", $param);
             }
             
               // langsung ubah pake library ci
