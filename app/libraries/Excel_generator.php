@@ -10,6 +10,10 @@
 require_once dirname(__FILE__) . '/PHPExcel/PHPExcel.php';
 
 class Excel_generator extends PHPExcel {
+    
+    public function __construct() {
+        parent::__construct();
+    }
 
     /**
      * @var CI_DB_result
@@ -179,6 +183,12 @@ class Excel_generator extends PHPExcel {
     public function exportTo2007($filename = 'doc') {
         $this->writeToFile($filename . '.xlsx', 'Excel2007', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         //$this->writeToFile($filename . '.xlsx', 'Excel2007', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    }
+    
+    
+    public function importir()
+    {
+        
     }
 
 }
