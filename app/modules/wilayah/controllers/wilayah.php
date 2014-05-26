@@ -22,6 +22,7 @@ class Wilayah extends Front_Controller{
     
     function __construct() {
         parent::__construct();
+        $this->load->library("excel_reader2");
     }
     
     function index()
@@ -72,6 +73,22 @@ class Wilayah extends Front_Controller{
             }
         }
     }
+    
+    function drop_wilayah_prov()
+    {
+        
+    }
+    
+    function drop_wilayah_kokab()
+    {
+        
+    }
+    
+    function drop_wilayah_kecam()
+    {
+        
+    }
+    
     
     function unduh_wilayah()
     {
